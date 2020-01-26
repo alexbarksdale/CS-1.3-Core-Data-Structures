@@ -25,26 +25,12 @@ def decode(digits=str, base=int) -> int:
     '''Decode given digits in given base to number in base 10'''
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
+    # TODO: Remove space from input
+
     conv_digits = 0
     for i, value in enumerate(digits[::-1]):
         conv_digits = conv_digits + digit_to_number(value) * (base ** i)
     return conv_digits
-
-    # schema = list(digits)[::-1]
-    # print(f'Schema = {schema}')
-
-    # if base == 2:
-    #     # for i, value in enumerate(digits[::-1]):
-    #     #     if value == '1':
-    #     #         conv_digits = conv_digits + int(value) * (base ** i)
-
-    #     # return conv_digits
-
-    #     # ! Test the difference
-    #     for i in range(len(schema)):
-    #         if schema[i] == '1':
-    #             conv_digits = conv_digits + int(schema[i]) * (base ** i)
-    #     return conv_digits
 
 
 def encode(number=int, base=int) -> str:
@@ -56,12 +42,13 @@ def encode(number=int, base=int) -> str:
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
-    # TODO: Encode number in binary (base 2)
-    # ...
-    # TODO: Encode number in hexadecimal (base 16)
-    # ...
-    # TODO: Encode number in any base (2 up to 36)
-    # ...
+
+    output = ''
+    while number > 0:
+        remainder = number % base
+        number = number // base
+        output += str(digit_to_number(str(remainder)))
+    return output[::-1]
 
 
 def convert(digits, base1, base2):
@@ -95,6 +82,9 @@ def main():
 
         decode_result = decode(digits, base1)
         print(f'Decoded {digits} from base {base1} to: {decode_result}')
+
+        encode_result = encode(int(digits), base1)
+        print(f'Encoded {digits} from base {base1} to: {encode_result}')
 
         # Convert given digits between bases
         result = convert(digits, base1, base2)
