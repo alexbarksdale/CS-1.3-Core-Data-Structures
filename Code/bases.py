@@ -9,30 +9,33 @@ import string
 # string.printable is digits + ascii_letters + punctuation + whitespace
 
 
-def digit_to_number(d=str) -> int:
-    '''Converts a digit to a number'''
+def char_to_digit(d=str) -> int:
+    '''Converts a digit to a number.
+    ord(): returns an int representing the Unicode character
+    Example:
+        In unicode 65 = 'A' + 10 because 'A' = 10 in Hex
+            - If 'B' was passed in -- 66 - 65 = 1 + 10 = 11
+    '''
     if d >= 'A' and d <= 'F':
-        # Unicode: 65 = 'A' + 10 because A = '10' in Hex
-        #   - If 'B' was passed in 66 - 65 = 1 + 10 = 11
         return ord(d) - 65 + 10
     return int(d)
 
 
-def get_char(remainder=int) -> str:
-    '''Converts a digit to a character value'''
+def digit_to_char(remainder=int) -> str:
+    '''Converts a digit to a character value.'''
     return string.printable[remainder]
 
 
 def decode(digits=str, base=int) -> int:
-    '''Decode given digits in given base to number in base 10'''
+    '''Decode given digits in given base to number in base 10.'''
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
 
-    conv_digits = 0
+    decoded_digits = 0
     for i, value in enumerate(digits[::-1]):
-        conv_digits = conv_digits + \
-            digit_to_number(value.capitalize()) * (base ** i)
-    return conv_digits
+        decoded_digits = decoded_digits + \
+            char_to_digit(value.capitalize()) * (base ** i)
+    return decoded_digits
 
 
 def encode(number=int, base=int) -> str:
@@ -42,13 +45,13 @@ def encode(number=int, base=int) -> str:
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
 
-    output = ''
+    encoded_numbers = ''
     while number > 0:
         remainder = number % base
         number = number // base
-        output += get_char(remainder)
+        encoded_numbers += digit_to_char(remainder)
 
-    return output[::-1]
+    return encoded_numbers[::-1]
 
 
 def convert(digits=str, base1=int, base2=int) -> str:
@@ -65,7 +68,7 @@ def convert(digits=str, base1=int, base2=int) -> str:
 
 
 def main():
-    """Read command-line arguments and convert given digits between bases."""
+    '''Read command-line arguments and convert given digits between bases.'''
     import sys
     args = sys.argv[1:]  # Ignore script file name
 
