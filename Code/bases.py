@@ -10,7 +10,7 @@ import string
 
 
 def digit_to_number(d=str) -> int:
-    '''Based off Sahil Shelangia implementation'''
+    '''Converts a digit to a number'''
     if d >= 'A' and d <= 'F':
         # Unicode: 65 = 'A' + 10 because A = '10' in Hex
         #   - If 'B' was passed in 66 - 65 = 1 + 10 = 11
@@ -18,7 +18,7 @@ def digit_to_number(d=str) -> int:
     return int(d)
 
 
-def get_char(remainder) -> str:
+def get_char(remainder=int) -> str:
     '''Converts a digit to a character value'''
     return string.printable[remainder]
 
@@ -46,7 +46,8 @@ def encode(number=int, base=int) -> str:
     while number > 0:
         remainder = number % base
         number = number // base
-        output += str(get_char(remainder))
+        output += get_char(remainder)
+
     return output[::-1]
 
 
