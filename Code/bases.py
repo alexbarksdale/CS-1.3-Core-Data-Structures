@@ -1,10 +1,8 @@
 #!python
 
 import string
-from utils import time_it
-# Hint: Use these string constants to encode/decode hexadecimal digits and more
 # string.digits is '0123456789'
-# string.hexdigits is '0123456789abcdefABCDEF'
+# string.hexdigits is ''0123456789abcdefABCDEF''
 # string.ascii_lowercase is 'abcdefghijklmnopqrstuvwxyz'
 # string.ascii_uppercase is 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 # string.ascii_letters is ascii_lowercase + ascii_uppercase
@@ -20,24 +18,25 @@ def digit_to_number(d=str) -> int:
     return int(d)
 
 
-@time_it
+def get_char(remainder) -> str:
+    '''Converts a digit to a character value'''
+    return string.printable[remainder]
+
+
 def decode(digits=str, base=int) -> int:
     '''Decode given digits in given base to number in base 10'''
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
-    # TODO: Remove space from input
 
     conv_digits = 0
     for i, value in enumerate(digits[::-1]):
-        conv_digits = conv_digits + digit_to_number(value) * (base ** i)
+        conv_digits = conv_digits + \
+            digit_to_number(value.capitalize()) * (base ** i)
     return conv_digits
 
 
 def encode(number=int, base=int) -> str:
-    """Encode given number in base 10 to digits in given base.
-    number: int -- integer representation of number (in base 10)
-    base: int -- base to convert to
-    return: str -- string representation of number (in given base)"""
+    '''Encode given number in base 10 to digits in given base.'''
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # Handle unsigned numbers only for now
@@ -47,27 +46,21 @@ def encode(number=int, base=int) -> str:
     while number > 0:
         remainder = number % base
         number = number // base
-        output += str(digit_to_number(str(remainder)))
+        output += str(get_char(remainder))
     return output[::-1]
 
 
-def convert(digits, base1, base2):
-    """Convert given digits in base1 to digits in base2.
+def convert(digits=str, base1=int, base2=int) -> str:
+    '''Convert given digits in base1 to digits in base2.
     digits: str -- string representation of number (in base1)
     base1: int -- base of given number
     base2: int -- base to convert to
-    return: str -- string representation of number (in base2)"""
+    return: str -- string representation of number (in base2)'''
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base1 <= 36, 'base1 is out of range: {}'.format(base1)
     assert 2 <= base2 <= 36, 'base2 is out of range: {}'.format(base2)
-    # TODO: Convert digits from base 2 to base 16 (and vice versa)
-    # ...
-    # TODO: Convert digits from base 2 to base 10 (and vice versa)
-    # ...
-    # TODO: Convert digits from base 10 to base 16 (and vice versa)
-    # ...
-    # TODO: Convert digits from any base to any base (2 up to 36)
-    # ...
+
+    return encode(decode(digits, base1), base2)
 
 
 def main():
@@ -76,15 +69,9 @@ def main():
     args = sys.argv[1:]  # Ignore script file name
 
     if len(args) == 3:
-        digits = args[0].capitalize()
+        digits = args[0]
         base1 = int(args[1])
         base2 = int(args[2])
-
-        decode_result = decode(digits, base1)
-        print(f'Decoded {digits} from base {base1} to: {decode_result}')
-
-        encode_result = encode(int(digits), base1)
-        print(f'Encoded {digits} from base {base1} to: {encode_result}')
 
         # Convert given digits between bases
         result = convert(digits, base1, base2)
