@@ -20,7 +20,7 @@ def decode(digits=str, base=int) -> int:
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     decoded_digits = 0
     for i, value in enumerate(digits[::-1]):
-        decoded_digits = decoded_digits + int(value, base) * (base**i)
+        decoded_digits += int(value, base) * (base**i)
     return decoded_digits
 
 
@@ -57,6 +57,8 @@ def main():
     '''Read command-line arguments and convert given digits between bases.'''
     import sys
     args = sys.argv[1:]  # Ignore script file name
+    
+    print(decode('1101', 2))
 
     if len(args) == 3:
         digits = args[0]
