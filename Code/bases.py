@@ -9,18 +9,6 @@ import string
 # string.printable is digits + ascii_letters + punctuation + whitespace
 
 
-def char_to_digit(d=str) -> int:
-    '''Converts a digit to a number.
-    ord(): returns an int representing the Unicode character
-    Example:
-        In unicode 65 = 'A' + 10 because 'A' = 10 in Hex
-            - If 'B' was passed in -- 66 - 65 = 1 + 10 = 11
-    '''
-    if d >= 'A' and d <= 'F':
-        return ord(d) - 65 + 10
-    return int(d)
-
-
 def digit_to_char(remainder=int) -> str:
     '''Converts a digit to a character value.'''
     return string.printable[remainder]
@@ -30,11 +18,9 @@ def decode(digits=str, base=int) -> int:
     '''Decode given digits in given base to number in base 10.'''
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
-
     decoded_digits = 0
     for i, value in enumerate(digits[::-1]):
-        decoded_digits = decoded_digits + \
-            char_to_digit(value.capitalize()) * (base ** i)
+        decoded_digits = decoded_digits + int(value, base) * (base**i)
     return decoded_digits
 
 
