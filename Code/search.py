@@ -1,10 +1,11 @@
 #!python
 
+
 def linear_search(array, item):
     """return the first index of item in array or None if item is not found"""
     # implement linear_search_iterative and linear_search_recursive below, then
     # change this to call your implementation to verify it passes all tests
-    return linear_search_iterative(array, item)
+    return linear_search_recursive(array, item)
     # return linear_search_recursive(array, item)
 
 
@@ -13,12 +14,17 @@ def linear_search_iterative(array, item):
     for index, value in enumerate(array):
         if item == value:
             return index  # found
-    return None  # not found
 
 
 def linear_search_recursive(array, item, index=0):
-    # TODO: implement linear search recursively here
-    pass
+    if index > len(array) - 1:
+        return 'No item found'
+
+    if item == array[index]:
+        return index
+
+    return linear_search_recursive(array, item, index + 1)
+
     # once implemented, change linear_search to call linear_search_recursive
     # to verify that your recursive implementation passes all tests
 
@@ -43,3 +49,12 @@ def binary_search_recursive(array, item, left=None, right=None):
     pass
     # once implemented, change binary_search to call binary_search_recursive
     # to verify that your recursive implementation passes all tests
+
+
+def main():
+    heroes = ['Iron Man', 'Thor', 'Batman', 'Deadpool', 'Hawkeye']
+    print(linear_search(heroes, 'Thor'))
+
+
+if __name__ == '__main__':
+    main()
