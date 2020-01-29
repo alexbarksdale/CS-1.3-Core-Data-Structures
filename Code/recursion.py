@@ -13,18 +13,19 @@ def factorial(n):
 def factorial_iterative(n):
     prod = 1
     for i in range(n):
-        prod *= i + 1 
+        prod *= i + 1
     return prod
 
 
 def factorial_recursive(n):
     # check if n is one of the base cases
-    if n == 0 or n == 1:
-        return 1
-    # check if n is an integer larger than the base cases
-    elif n > 1:
-        # call function recursively
-        return n * factorial_recursive(n - 1)
+    # if n == 0 or n == 1:
+    #     return 1
+    # # check if n is an integer larger than the base cases
+    # elif n > 1:
+    #     # call function recursively
+    #     return n * factorial_recursive(n - 1)
+    return 1 if n == 0 else n * factorial_recursive(n-1)
 
 
 def main():
