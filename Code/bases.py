@@ -33,9 +33,8 @@ def encode(number=int, base=int) -> str:
 
     encoded_numbers = ''
     while number > 0:
-        remainder = number % base
-        number = number // base
-        encoded_numbers += digit_to_char(remainder)
+        number, rem = divmod(number, base)
+        encoded_numbers += digit_to_char(rem)
 
     return encoded_numbers[::-1]
 
@@ -57,8 +56,6 @@ def main():
     '''Read command-line arguments and convert given digits between bases.'''
     import sys
     args = sys.argv[1:]  # Ignore script file name
-    
-    print(decode('1101', 2))
 
     if len(args) == 3:
         digits = args[0]
