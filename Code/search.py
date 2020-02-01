@@ -7,13 +7,21 @@ def linear_search(array, item):
 
 
 def linear_search_iterative(array, item) -> int:
-    # loop over all array values until item is found
+    """
+    Best case: O(1) if the the value is the first item in the array
+    Worst case: O(N) if we need to search through the entire array
+    """
     for index, value in enumerate(array):
         if item == value:
             return index  # found
 
 
 def linear_search_recursive(array, item, index=0) -> None or int:
+    """
+    Best case: O(1) if the the value is the first item in the array
+    Worst case: O(N) if we need to search through the entire array
+    """
+
     if index > len(array) - 1:
         return None
 
@@ -30,9 +38,12 @@ def binary_search(array, item):
 
 
 def binary_search_iterative(array, item) -> None or int:
-    # [1,2,3,4,5,6,7,8,9]
-    low = 0
-    high = len(array) - 1
+    """
+    Best case: O(1) if the the item is the middle in the array
+    Worst case: O(log n) because you narrow the search by two operations every time
+    """
+
+    low, high = 0, len(array) - 1
 
     while low <= high:
         mid = (low + high) // 2
@@ -46,10 +57,13 @@ def binary_search_iterative(array, item) -> None or int:
 
 
 def binary_search_recursive(array, item, low=None, high=None) -> None or int:
-    if low is None:
-        low = 0
-    if high is None:
-        high = len(array) - 1
+    """
+    Best case: O(1) if the the item is the middle in the array
+    Worst case: O(log n) because you narrow the search by two operations every time
+    """
+
+    if low is None and high is None:
+        low, high = 0, len(array) - 1
 
     if low > high:
         return None
