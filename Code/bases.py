@@ -30,8 +30,6 @@ def encode(number=int, base=int) -> str:
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
-# 1101 to base 10
-# 42 to base 2
     encoded_numbers = ''
     while number > 0:
         number, rem = divmod(number, base)
