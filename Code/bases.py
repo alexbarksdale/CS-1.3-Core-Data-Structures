@@ -18,6 +18,7 @@ def decode(digits=str, base=int) -> int:
     '''Decode given digits in given base to number in base 10.'''
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
+
     decoded_digits = 0
     for i, value in enumerate(digits[::-1]):
         decoded_digits += int(value, base) * (base**i)
@@ -30,6 +31,7 @@ def encode(number=int, base=int) -> str:
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
+
     encoded_numbers = ''
     while number > 0:
         number, rem = divmod(number, base)
