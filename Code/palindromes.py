@@ -14,13 +14,18 @@ def is_palindrome(text=str):
     # implement is_palindrome_iterative and is_palindrome_recursive below, then
     # change this to call your implementation to verify it passes all tests
     assert isinstance(text, str), 'input is not a string: {}'.format(text)
-    # return is_palindrome_iterative(text)
-    return is_palindrome_recursive(text)
+    return is_palindrome_iterative(text)
+    # return is_palindrome_recursive(text)
+
+
+def clean_text(text=str) -> str:
+    return ''.join(filter(str.isalnum, text.lower()))
 
 
 @time_it
 def is_palindrome_iterative(text=str) -> bool:
-    text = text.lower()
+    text = clean_text(text)
+    # text = text.lower()
     low, high = 0, len(text) - 1
 
     # while low < high:
@@ -34,12 +39,12 @@ def is_palindrome_iterative(text=str) -> bool:
     #     high -= 1
     # return True
     while low < high:
-        if not text[high].isalnum():
-            high -= 1
-            continue
-        if not text[low].isalnum():
-            low += 1
-            continue
+        # if not text[high].isalnum():
+        #     high -= 1
+        #     continue
+        # if not text[low].isalnum():
+        #     low += 1
+        #     continue
         if text[low] != text[high]:
             return False
         high -= 1

@@ -1,10 +1,33 @@
 #!python
 
+
 def contains(text, pattern):
     """Return a boolean indicating whether pattern occurs in text."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement contains here (iteratively and/or recursively)
+
+    print(f'The word is: {text}')
+    print(f'len of text: {len(text)}')
+    print(f'len of pattern: {len(pattern)}')
+    print(range(len(text) - len(pattern) + 1))
+
+    for i in range(len(text) - len(pattern) + 1):
+        match = True
+        for j in range(len(pattern)):
+            # i = 0
+            # j = 0
+            # if text[0] = pattern[0]
+            # if e is c
+            print(text[i], text[i+j], pattern[j])
+            if text[i+j] != pattern[j]:
+                match = False
+                break
+        if match:
+            return True
+    return False
+
+
+print(contains('execute', 'cute'))
 
 
 def find_index(text, pattern):
