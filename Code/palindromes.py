@@ -1,7 +1,5 @@
-#!python
-
+#!pythonk
 import string
-from utils import time_it
 # Hint: Use these string constants to ignore capitalization and/or punctuation
 # string.ascii_lowercase is 'abcdefghijklmnopqrstuvwxyz'
 # string.ascii_uppercase is 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -22,10 +20,9 @@ def clean_text(text=str) -> str:
     return ''.join(filter(str.isalnum, text.lower()))
 
 
-@time_it
 def is_palindrome_iterative(text=str) -> bool:
-    text = clean_text(text)
     # text = text.lower()
+    text = clean_text(text)
     low, high = 0, len(text) - 1
 
     # while low < high:
@@ -53,27 +50,23 @@ def is_palindrome_iterative(text=str) -> bool:
 
 
 def is_palindrome_recursive(text=str, low=None, high=None):
-    text = text.lower()
+    text = clean_text(text)
     if low is None and high is None:
         low, high = 0, len(text) - 1
-
     if low > high:
         return True
-    if not text[high].isalnum():
-        return is_palindrome_recursive(text, low, high - 1)
-    if not text[low].isalnum():
-        return is_palindrome_recursive(text, low + 1, high)
+    # if not text[high].isalnum():
+    #     return is_palindrome_recursive(text, low, high - 1)
+    # if not text[low].isalnum():
+    #     return is_palindrome_recursive(text, low + 1, high)
     if text[low] != text[high]:
         return False
-    high -= 1
-    low += 1
-    return is_palindrome_recursive(text, low, high)
+    return is_palindrome_recursive(text, low + 1, high - 1)
 
 
 def main():
     import sys
     args = sys.argv[1:]  # Ignore script file name
-    print(is_palindrome('    taco    --      cat         '))
     if len(args) > 0:
         for arg in args:
             is_pal = is_palindrome(arg)
