@@ -1,44 +1,58 @@
 #!python
 
 
-def contains(text, pattern):
+def contains(text=str, pattern=str) -> bool:
     """Return a boolean indicating whether pattern occurs in text."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
 
-    print(f'The word is: {text}')
-    print(f'len of text: {len(text)}')
-    print(f'len of pattern: {len(pattern)}')
-    print(range(len(text) - len(pattern) + 1))
+    # for i in range(len(text) - len(pattern) + 1):
+    #     if not pattern:
+    #         return True
+    #     if text[i] == pattern[0]:
+    #         if text[i:(i + len(pattern))] == pattern:
+    #             return True
+    # return False
 
-    for i in range(len(text) - len(pattern) + 1):
-        match = True
-        for j in range(len(pattern)):
-            # i = 0
-            # j = 0
-            # if text[0] = pattern[0]
-            # if e is c
-            print(text[i], text[i+j], pattern[j])
-            if text[i+j] != pattern[j]:
-                match = False
-                break
-        if match:
-            return True
-    return False
+    return find_index(text, pattern) is not None
 
 
-print(contains('execute', 'cute'))
-
-
-def find_index(text, pattern):
+def find_index(text=str, pattern=str) -> None or int:
     """Return the starting index of the first occurrence of pattern in text,
     or None if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement find_index here (iteratively and/or recursively)
+
+    # Pattern: KLMNOPZ
+    # ABCDEFGHIJKLMNOPQRSTUVWX
+    # ABCDEFGHIJKLMNOPQR      STUVWX
+    # \\ Utilizes string slicing //
+    for i in range(len(text) - len(pattern) + 1):
+        if not pattern:
+            return i
+        if text[i] == pattern[0]:
+            if text[i:(i + len(pattern))] == pattern:
+                return i
+    return None
+    # i = 0
+    # j = 0
+    # if text[0] = pattern[0]
+    # if e is c
+    # print(text[i], text[i+j], pattern[j])
+
+    # \\ Does not utilize string slicing //
+    # for i in range(len(text) - (len(pattern) - 1)):
+    #     match = True
+    #     for j in range(len(pattern)):
+    #         if text[i+j] != pattern[j]:
+    #             match = False
+    #             break
+    #     if match:
+    #         return i
+    # return None
 
 
-def find_all_indexes(text, pattern):
+def find_all_indexes(text=str, pattern=str) -> None or list:
     """Return a list of starting indexes of all occurrences of pattern in text,
     or an empty list if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
@@ -49,10 +63,8 @@ def find_all_indexes(text, pattern):
 def test_string_algorithms(text, pattern):
     found = contains(text, pattern)
     print('contains({!r}, {!r}) => {}'.format(text, pattern, found))
-    # TODO: Uncomment these lines after you implement find_index
     index = find_index(text, pattern)
     print('find_index({!r}, {!r}) => {}'.format(text, pattern, index))
-    # TODO: Uncomment these lines after you implement find_all_indexes
     indexes = find_all_indexes(text, pattern)
     print('find_all_indexes({!r}, {!r}) => {}'.format(text, pattern, indexes))
 
