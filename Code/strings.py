@@ -2,11 +2,25 @@
 
 
 def contains(text=str, pattern=str) -> bool:
-    """Return a boolean indicating whether pattern occurs in text."""
+    """Return a boolean indicating whether pattern occurs in text.
+    Time Complexity based off first solution below
+        - o(n*j) - n being the outer loop and j being the inner loop"""
+
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
 
-    # * \\ Solution without reuse of code // *
+    # * \\ Does not utilize string slicing // *
+    # for i in range(len(text) - len(pattern) + 1):
+    #     match = True
+    #     for j in range(len(pattern)):
+    #         if text[i+j] != pattern[j]:
+    #             match = False
+    #             break
+    #     if match:
+    #         return match
+    # return False
+
+    # * \\ Utilizes string slicing // *
     # for i in range(len(text) - len(pattern) + 1):
     #     if not pattern:
     #         return True
@@ -20,9 +34,24 @@ def contains(text=str, pattern=str) -> bool:
 
 def find_index(text=str, pattern=str) -> None or int:
     """Return the starting index of the first occurrence of pattern in text,
-    or None if not found."""
+    or None if not found.
+    Time Complexity based off first solution below
+        - o(n*j) - n being the outer loop and j being the inner loop"""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
+
+    # * \\ Does not utilize string slicing // *
+    # for i in range(len(text) - len(pattern) + 1):
+    #     match = True
+    #     if not pattern:
+    #         return i
+    #     for j in range(len(pattern)):
+    #         if text[i+j] != pattern[j]:
+    #             match = False
+    #             break
+    #     if match:
+    #         return i
+    # return None
 
     # * \\ Utilizes string slicing // *
     # for i in range(len(text) - len(pattern) + 1):
@@ -33,25 +62,17 @@ def find_index(text=str, pattern=str) -> None or int:
     #             return i
     # return None
 
-    # * \\ Does not utilize string slicing // *
-    # for i in range(len(text) - (len(pattern) - 1)):
-    #     match = True
-    #     if not pattern:
-    #         return None
-    #     for j in range(len(pattern)):
-    #         if text[i+j] != pattern[j]:
-    #             match = False
-    #             break
-    #     if match:
-    #         return i
-
     first_index = find_all_indexes(text, pattern)
     return first_index[0] if first_index else None
 
 
 def find_all_indexes(text=str, pattern=str) -> list:
     """Return a list of starting indexes of all occurrences of pattern in text,
-    or an empty list if not found."""
+    or an empty list if not found.
+    - Best case: If there is no pattern and one char in the text
+    - Worse Case: if we have to loop to the end
+    - If there is a pattern:
+        - o(n*j) - n being the outer loop and j being the inner loop"""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
 
@@ -67,6 +88,7 @@ def find_all_indexes(text=str, pattern=str) -> list:
             index_pos.append(i)
     return index_pos
 
+    # * \\ Utilizes string slicing // *
     # for i in range(len(text) - len(pattern) + 1):
     #     if text[i:(i + len(pattern))] == pattern:
     #         index_pos.append(i)
