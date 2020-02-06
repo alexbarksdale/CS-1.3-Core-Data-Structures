@@ -6,6 +6,7 @@ def contains(text=str, pattern=str) -> bool:
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
 
+    # * \\ Solution without reuse of code // *
     # for i in range(len(text) - len(pattern) + 1):
     #     if not pattern:
     #         return True
@@ -23,10 +24,7 @@ def find_index(text=str, pattern=str) -> None or int:
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
 
-    # Pattern: KLMNOPZ
-    # ABCDEFGHIJKLMNOPQRSTUVWX
-    # ABCDEFGHIJKLMNOPQR      STUVWX
-    # \\ Utilizes string slicing //
+    # * \\ Utilizes string slicing // *
     # for i in range(len(text) - len(pattern) + 1):
     #     if not pattern:
     #         return i
@@ -35,13 +33,7 @@ def find_index(text=str, pattern=str) -> None or int:
     #             return i
     # return None
 
-    # i = 0
-    # j = 0
-    # if text[0] = pattern[0]
-    # if e is c
-    # print(text[i], text[i+j], pattern[j])
-
-    # \\ Does not utilize string slicing //
+    # * \\ Does not utilize string slicing // *
     # for i in range(len(text) - (len(pattern) - 1)):
     #     match = True
     #     if not pattern:
@@ -68,10 +60,18 @@ def find_all_indexes(text=str, pattern=str) -> list:
 
     index_pos = []
     for i in range(len(text) - len(pattern) + 1):
-        if text[i:(i + len(pattern))] == pattern:
+        for j in range(len(pattern)):
+            if text[i+j] != pattern[j]:
+                break
+        else:
             index_pos.append(i)
-            continue
     return index_pos
+
+    # for i in range(len(text) - len(pattern) + 1):
+    #     if text[i:(i + len(pattern))] == pattern:
+    #         index_pos.append(i)
+    #         continue
+    # return index_pos
 
 
 def test_string_algorithms(text, pattern):
