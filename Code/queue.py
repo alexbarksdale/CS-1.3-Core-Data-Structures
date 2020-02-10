@@ -29,7 +29,8 @@ class LinkedQueue(object):
 
     def enqueue(self, item):
         """Insert the given item at the back of this queue.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) because the LL append() executes once in constant time.
+        """
         self.list.append(item)
 
     def front(self):
@@ -40,7 +41,9 @@ class LinkedQueue(object):
     def dequeue(self):
         """Remove and return the item at the front of this queue,
         or raise ValueError if this queue is empty.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) because the item being removed is the first item
+        which executes once in constant time.
+        """
         if self.is_empty():
             raise ValueError("Queue is empty")
 
@@ -75,7 +78,7 @@ class ArrayQueue(object):
 
     def enqueue(self, item):
         """Insert the given item at the back of this queue.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) because the operation executes once in constant time."""
         self.list.append(item)
 
     def front(self):
@@ -86,7 +89,10 @@ class ArrayQueue(object):
     def dequeue(self):
         """Remove and return the item at the front of this queue,
         or raise ValueError if this queue is empty.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(n*i) i being the # of items. An array is
+        contiguous, so if you remove an item, everything has to shift over
+        which takes n time.
+        """
         if self.is_empty():
             raise ValueError("Queue is empty")
 
