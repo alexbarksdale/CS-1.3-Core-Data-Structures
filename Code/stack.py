@@ -70,7 +70,7 @@ class ArrayStack(object):
 
     def is_empty(self):
         """Return True if this stack is empty, or False otherwise."""
-        return True if len(self.list) == 0 else False
+        return len(self.list) == 0
 
     def length(self):
         """Return the number of items in this stack."""
