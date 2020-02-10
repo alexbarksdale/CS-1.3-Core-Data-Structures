@@ -29,7 +29,7 @@ class LinkedStack(object):
 
     def push(self, item):
         """Insert the given item on the top of this stack.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) because the LL prepend() is constant time and executes once"""
         self.list.prepend(item)
 
     def peek(self):
@@ -42,7 +42,9 @@ class LinkedStack(object):
     def pop(self):
         """Remove and return the item on the top of this stack,
         or raise ValueError if this stack is empty.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) because the item being removed is the first item
+        which executes once in linear time.
+        """
         if self.list.is_empty():
             raise ValueError("Stack is empty")
 
@@ -78,7 +80,10 @@ class ArrayStack(object):
 
     def push(self, item):
         """Insert the given item on the top of this stack.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(n*i) i being the # of items. Because an array is
+        contiguous, so if you remove an item, everything has to shift over
+        which takes n time.
+        """
         self.list.insert(0, item)
 
     def peek(self):
@@ -89,7 +94,10 @@ class ArrayStack(object):
     def pop(self):
         """Remove and return the item on the top of this stack,
         or raise ValueError if this stack is empty.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(n*i) i being the # of items. Because an array is
+        contiguous, so if you remove an item, everything has to shift over
+        which takes n time.
+        """
         if self.is_empty():
             raise ValueError("Stack is empty")
         return self.list.pop(0)
