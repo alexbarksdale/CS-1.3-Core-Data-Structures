@@ -1,6 +1,8 @@
 #!python
+from utils import time_it
 
 
+@time_it
 def contains(text=str, pattern=str) -> bool:
     """Return a boolean indicating whether pattern occurs in text.
     Time Complexity based off first solution below
@@ -9,7 +11,7 @@ def contains(text=str, pattern=str) -> bool:
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
 
-    # * \\ Does not utilize string slicing // *
+    # * \\ Does not utilize string slicing (FASTER IN THE LONG RUN) // *
     # for i in range(len(text) - len(pattern) + 1):
     #     match = True
     #     for j in range(len(pattern)):
@@ -20,7 +22,7 @@ def contains(text=str, pattern=str) -> bool:
     #         return match
     # return False
 
-    # * \\ Utilizes string slicing // *
+    # * \\ Utilizes string slicing (SLOWER because it has to slice)// *
     # for i in range(len(text) - len(pattern) + 1):
     #     if not pattern:
     #         return True
@@ -32,6 +34,7 @@ def contains(text=str, pattern=str) -> bool:
     return True if find_all_indexes(text, pattern) else False
 
 
+@time_it
 def find_index(text=str, pattern=str) -> None or int:
     """Return the starting index of the first occurrence of pattern in text,
     or None if not found.
@@ -40,7 +43,7 @@ def find_index(text=str, pattern=str) -> None or int:
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
 
-    # * \\ Does not utilize string slicing // *
+    # * \\ Does not utilize string slicing (FASTER IN THE LONG RUN) // *
     # for i in range(len(text) - len(pattern) + 1):
     #     match = True
     #     if not pattern:
@@ -53,7 +56,7 @@ def find_index(text=str, pattern=str) -> None or int:
     #         return i
     # return None
 
-    # * \\ Utilizes string slicing // *
+    # * \\ Utilizes string slicing (SLOWER because it has to slice)// *
     # for i in range(len(text) - len(pattern) + 1):
     #     if not pattern:
     #         return i
@@ -66,6 +69,7 @@ def find_index(text=str, pattern=str) -> None or int:
     return first_index[0] if first_index else None
 
 
+@time_it
 def find_all_indexes(text=str, pattern=str) -> list:
     """Return a list of starting indexes of all occurrences of pattern in text,
     or an empty list if not found.
@@ -79,6 +83,7 @@ def find_all_indexes(text=str, pattern=str) -> list:
     if not pattern:
         return [i for i in range(len(text))]
 
+    # * \\ Does not utilize string slicing (FASTER IN THE LONG RUN) // *
     index_pos = []
     for i in range(len(text) - len(pattern) + 1):
         for j in range(len(pattern)):
@@ -88,7 +93,7 @@ def find_all_indexes(text=str, pattern=str) -> list:
             index_pos.append(i)
     return index_pos
 
-    # * \\ Utilizes string slicing // *
+    # * \\ Utilizes string slicing (SLOWER because it has to slice)// *
     # for i in range(len(text) - len(pattern) + 1):
     #     if text[i:(i + len(pattern))] == pattern:
     #         index_pos.append(i)
@@ -108,9 +113,6 @@ def test_string_algorithms(text, pattern):
 def main():
     """Read command-line arguments and test string searching algorithms."""
 
-    test = [1, 2, 3, 4, 5, 6]
-    test[2] = 10
-    print(test)
     import sys
     args = sys.argv[1:]  # Ignore script file name
     if len(args) == 2:
