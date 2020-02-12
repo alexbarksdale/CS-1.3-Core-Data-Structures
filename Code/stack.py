@@ -82,27 +82,24 @@ class ArrayStack(object):
 
     def push(self, item):
         """Insert the given item on the top of this stack.
-        Running time: O(n*i) i being the # of items. An array is
-        contiguous, so if you remove an item, everything has to shift over
-        which takes n time.
+        Running time: O(1) because the append operation executes once in constant time.
         """
-        self.list.insert(0, item)
+        self.list.append(item)
 
     def peek(self):
         """Return the item on the top of this stack without removing it,
         or None if this stack is empty."""
-        return None if self.is_empty() else self.list[0]
+        return None if self.is_empty() else self.list[len(self.list) - 1]
 
     def pop(self):
         """Remove and return the item on the top of this stack,
         or raise ValueError if this stack is empty.
-        Running time: O(n*i) i being the # of items. An array is
-        contiguous, so if you remove an item, everything has to shift over
-        which takes n time.
+        Running time: O(1) because it's removing the last item in the array
+        and no shifting of the items occur.
         """
         if self.is_empty():
             raise ValueError("Stack is empty")
-        return self.list.pop(0)
+        return self.list.pop(len(self.list) - 1)
 
 
 # Implement LinkedStack and ArrayStack above, then change the assignment below

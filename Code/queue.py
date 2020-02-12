@@ -78,25 +78,23 @@ class ArrayQueue(object):
 
     def enqueue(self, item):
         """Insert the given item at the back of this queue.
-        Running time: O(1) because the operation executes once in constant time."""
-        self.list.append(item)
+        Running time: O(n) because you need to shift everything
+        over by one after you insert"""
+        self.list.insert(0, item)
 
     def front(self):
         """Return the item at the front of this queue without removing it,
         or None if this queue is empty."""
-        return None if self.is_empty() else self.list[0]
+        return None if self.is_empty() else self.list[len(self.list) - 1]
 
     def dequeue(self):
         """Remove and return the item at the front of this queue,
         or raise ValueError if this queue is empty.
-        Running time: O(n*i) i being the # of items. An array is
-        contiguous, so if you remove an item, everything has to shift over
-        which takes n time.
-        """
+        Running time: O(1) because you're removing the last item and requires
+        no shifting."""
         if self.is_empty():
             raise ValueError("Queue is empty")
-
-        return self.list.pop(0)
+        return self.list.pop(len(self.list) - 1)
 
 
 # Implement LinkedQueue and ArrayQueue above, then change the assignment below
