@@ -4,7 +4,7 @@
 def contains(text=str, pattern=str) -> bool:
     """Return a boolean indicating whether pattern occurs in text.
     Time Complexity based off first solution below
-        - o(n*j) - n being the outer loop and j being the inner loop"""
+        - O(n*j) - n being the outer loop and j being the inner loop"""
 
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
@@ -36,7 +36,7 @@ def find_index(text=str, pattern=str) -> None or int:
     """Return the starting index of the first occurrence of pattern in text,
     or None if not found.
     Time Complexity based off first solution below
-        - o(n*j) - n being the outer loop and j being the inner loop"""
+        - O(n*j) - n being the outer loop and j being the inner loop"""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
 
@@ -69,10 +69,10 @@ def find_index(text=str, pattern=str) -> None or int:
 def find_all_indexes(text=str, pattern=str) -> list:
     """Return a list of starting indexes of all occurrences of pattern in text,
     or an empty list if not found.
-    - Best case: If there is no pattern and one char in the text
-    - Worse Case: if we have to loop to the end
+    - Best case: O(1) If there is no pattern and one char in the text
+    - Worse Case: O(n) if we have to loop to the end
     - If there is a pattern:
-        - o(n*j) - n being the outer loop and j being the inner loop"""
+        - O(n*j) - n being the outer loop and j being the inner loop"""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
 
