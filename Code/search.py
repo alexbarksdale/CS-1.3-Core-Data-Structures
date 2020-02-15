@@ -46,12 +46,14 @@ def binary_search_iterative(array, item) -> None or int:
     low, high = 0, len(array) - 1
 
     while low <= high:
-        mid = (low + high) // 2
+        mid = (low + high) // 2  # finds the middle item
         if item == array[mid]:
             return mid  # position of the item in the array
         elif item < array[mid]:
+            # moves the high position if the item is less than the middle
             high = mid - 1
         else:
+            # moves the low position if the item is greater than the middle
             low = mid + 1
     return None
 
@@ -61,18 +63,20 @@ def binary_search_recursive(array, item, low=None, high=None) -> None or int:
     Best case: O(1) if the the item is the middle in the array
     Worst case: O(log n) because you narrow the search by two operations every time
     """
-
+    # sets initial values
     if low is None and high is None:
         low, high = 0, len(array) - 1
 
     if low > high:
         return None
 
-    mid = (low + high) // 2
+    mid = (low + high) // 2  # finds the middle item
     if item == array[mid]:
         return mid
     if item < array[mid]:
+        # moves the high position if the item is less than the middle
         return binary_search_recursive(array, item, low, mid - 1)
+    # moves the low position if the item is greater than the middle
     return binary_search_recursive(array, item, mid + 1, high)
 
 
