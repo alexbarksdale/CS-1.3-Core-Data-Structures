@@ -21,6 +21,7 @@ def decode(digits=str, base=int) -> int:
 
     decoded_digits = 0
     for i, value in enumerate(digits[::-1]):
+        # int() converts a number or a strint to an int
         decoded_digits += int(value, base) * (base**i)
     return decoded_digits
 
@@ -34,10 +35,11 @@ def encode(number=int, base=int) -> str:
 
     encoded_numbers = ''
     while number > 0:
+        # returns a tuple with a divided number and the remainder
         number, rem = divmod(number, base)
         encoded_numbers += digit_to_char(rem)
 
-    return encoded_numbers[::-1]
+    return encoded_numbers[::-1]  # Reverses the string
 
 
 def convert(digits=str, base1=int, base2=int) -> str:
