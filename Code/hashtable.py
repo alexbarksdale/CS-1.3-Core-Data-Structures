@@ -151,7 +151,8 @@ class HashTable(object):
         # Get a list to temporarily hold all current key-value entries
         old_list = self.items()
         # Create a new list of new_size total empty linked list buckets
-        self.__init__(new_size)
+        self.buckets = [LinkedList() for i in range(new_size)]
+        self.size = 0  # Number of key-value entries
         # Insert each key-value entry into the new list of buckets,
         # which will rehash them into a new bucket index based on the new size
         for key, value in old_list:
