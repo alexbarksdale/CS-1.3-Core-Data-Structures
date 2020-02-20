@@ -5,7 +5,6 @@ def linear_search(array, item):
     """return the first index of item in array or None if item is not found"""
     return linear_search_recursive(array, item)
 
-
 def linear_search_iterative(array, item) -> int:
     """
     Best case: O(1) if the the value is the first item in the array
