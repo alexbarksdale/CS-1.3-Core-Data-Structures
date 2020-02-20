@@ -36,12 +36,6 @@ def is_palindrome_iterative(text=str) -> bool:
     #     high -= 1
     # return True
     while low < high:
-        # if not text[high].isalnum():
-        #     high -= 1
-        #     continue
-        # if not text[low].isalnum():
-        #     low += 1
-        #     continue
         if text[low] != text[high]:
             return False
         high -= 1
@@ -55,10 +49,6 @@ def is_palindrome_recursive(text=str, low=None, high=None):
         low, high = 0, len(text) - 1
     if low > high:
         return True
-    # if not text[high].isalnum():
-    #     return is_palindrome_recursive(text, low, high - 1)
-    # if not text[low].isalnum():
-    #     return is_palindrome_recursive(text, low + 1, high)
     if text[low] != text[high]:
         return False
     return is_palindrome_recursive(text, low + 1, high - 1)
