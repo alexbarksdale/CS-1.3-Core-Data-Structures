@@ -219,13 +219,49 @@ class BinarySearchTree(object):
         return node
 
     def delete(self, item):
-        pass
         """Remove given item from this tree, if present, or raise ValueError.
         TODO: Best case running time: ??? under what conditions?
         TODO: Worst case running time: ??? under what conditions?"""
         # TODO: Use helper methods and break this algorithm down into 3 cases
         # based on how many children the node containing the given item has and
         # implement new helper methods for subtasks of the more complex cases
+        return self.delete_helper(self.root, item)
+    
+    def min_val(self, node):
+        curr_node = node
+        while curr_node.left is not None:
+            curr_node = curr_node.left
+        return curr_node
+
+    def delete_helper(self, node, item):
+        if node is None:
+            return node
+        if item < node.data:
+            node.left = self.delete_helper(node.left, item)
+        if item > node.data:
+            node.right = self.delete_helper(node.right, item)
+        else:
+            if node.left is None and node.right is None:
+                node = None
+                self.size -= 1
+                return node
+            # One child
+            if node.left is None:
+                temp_node = node.right
+                node = None
+                self.size -= 1
+                return temp_node
+            if node.right is None:
+                temp_node = node.left
+                node = None
+                self.size -= 1
+                return temp_node
+            # Two children
+            temp_node = self.min_val(node.right)
+            node.data = temp_node.data
+            node.right = self.delete_helper(node.right, temp_node.data)
+            self.size -= 1
+        return node
 
     def items_in_order(self):
         """Return an in-order list of all items in this binary search tree."""
@@ -363,6 +399,12 @@ def test_binary_search_tree():
     for item in items:
         tree.insert(item)
         print('insert({}), size: {}'.format(item, tree.size))
+    print('root: {}'.format(tree.root))
+
+    print('\nDeleting items:')
+    for item in items:
+        tree.delete(item)
+        print('Delete({}), size: {}'.format(item, tree.size))
     print('root: {}'.format(tree.root))
 
     print('\nSearching for items:')

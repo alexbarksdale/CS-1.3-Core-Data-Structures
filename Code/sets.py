@@ -1,11 +1,46 @@
 #! python
-from binarytree import BinarySearchTree
+from hashtable import HashTable
 
-class Sets(object):
+
+class Set(object):
     def __init__(self, elements=None):
-        self.tree = BinarySearchTree 
-
+        self.ht = HashTable()
         if elements is not None:
-            for element in elements:
-                # TODO: use add method
-                pass 
+            for el in elements:
+                self.add(el)
+
+    def size(self):
+        return self.ht.size
+
+    def contains(self, el):
+        return self.ht.contains(el)
+
+    def add(self, el):
+        if not self.contains(el):
+            self.ht.set(el,el)
+
+    def remove(self, el):
+        # Present check is handled in HashTable
+        self.ht.delete(el)
+
+    def union(self, other_set):
+        return Set(self.ht.keys() + other_set.ht.keys())
+
+    def intersection(self, other_set):
+        n_set = []
+        for el in self.ht.keys():
+            if other_set.contains(el):
+                n_set.append(el)
+        print(n_set)
+        return Set(n_set)
+
+    def difference(self, other_set):
+        n_set = []
+        for el in self.ht.keys():
+            if not other_set.contains(el):
+                n_set.append(el)
+        return Set(n_set)
+
+    def is_subset(self, other_set):
+        for el in other_set.ht.keys():
+            return self.contains(el)
