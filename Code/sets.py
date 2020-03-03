@@ -17,7 +17,7 @@ class Set(object):
 
     def add(self, el):
         if not self.contains(el):
-            self.ht.set(el,el)
+            self.ht.set(el, el)
 
     def remove(self, el):
         # Present check is handled in HashTable
@@ -27,20 +27,21 @@ class Set(object):
         return Set(self.ht.keys() + other_set.ht.keys())
 
     def intersection(self, other_set):
-        n_set = []
+        n_set = Set()
         for el in self.ht.keys():
             if other_set.contains(el):
-                n_set.append(el)
-        print(n_set)
-        return Set(n_set)
+                n_set.add(el)
+        return n_set
 
     def difference(self, other_set):
-        n_set = []
+        n_set = Set()
         for el in self.ht.keys():
             if not other_set.contains(el):
-                n_set.append(el)
-        return Set(n_set)
+                n_set.add(el)
+        return n_set
 
     def is_subset(self, other_set):
         for el in other_set.ht.keys():
-            return self.contains(el)
+            if not self.ht.contains(el):
+                return False
+        return True

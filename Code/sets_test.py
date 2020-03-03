@@ -5,7 +5,7 @@ import unittest
 class SetTest(unittest.TestCase):
 
     def test_init(self):
-        el = ['A','K','B']
+        el = ['A', 'K', 'B']
         s = Set(el)
         assert s.ht.length() == 3
         assert s.size() == 3
@@ -20,7 +20,6 @@ class SetTest(unittest.TestCase):
         assert s.size() == 2
         s.add('B')
         assert s.size() == 3
-
 
     def test_remove(self):
         s = Set()
@@ -80,14 +79,17 @@ class SetTest(unittest.TestCase):
 
     def test_is_subset(self):
         s1 = Set(['A', 'K', 'C'])
-        s2 = Set(['Z', 'Q'])
-        s3 = Set(['A', 'K'])
-        s4 = Set(['E', 'F'])
+        s2 = Set(['Z', 'Q', 'T'])
+        s3 = Set(['A', 'K', 'F'])
+        s4 = Set(['Z', 'Q'])
+        s5 = Set(['Z', 'Q'])
+        s6 = Set([])
 
         assert s1.is_subset(s2) == False
-        assert s1.is_subset(s3) == True
-        assert s1.is_subset(s4) == False
-        
+        assert s1.is_subset(s3) == False
+        assert s2.is_subset(s4) == True
+        assert s5.is_subset(s6) == True
+
 
 if __name__ == '__main__':
     unittest.main()
