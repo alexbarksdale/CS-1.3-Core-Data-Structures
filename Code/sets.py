@@ -20,13 +20,15 @@ class Set(object):
             self.ht.set(el, el)
 
     def remove(self, el):
-        # Present check is handled in HashTable
+        # Does contain check is handled in HashTable
         self.ht.delete(el)
 
     def union(self, other_set):
         return Set(self.ht.keys() + other_set.ht.keys())
 
     def intersection(self, other_set):
+        # TODO: Time complexity and add a check to prevent having to enter the loop. Something similar to is_subset
+
         n_set = Set()
         for el in self.ht.keys():
             if other_set.contains(el):
@@ -34,6 +36,7 @@ class Set(object):
         return n_set
 
     def difference(self, other_set):
+        # TODO: Time complexity and add a check to prevent having to enter the loop. Something similar to is_subset
         n_set = Set()
         for el in self.ht.keys():
             if not other_set.contains(el):
@@ -41,6 +44,9 @@ class Set(object):
         return n_set
 
     def is_subset(self, other_set):
+        if other_set.size > self.ht.size:
+            return False
+
         for el in other_set.ht.keys():
             if not self.ht.contains(el):
                 return False

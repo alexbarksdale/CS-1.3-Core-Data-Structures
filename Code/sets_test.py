@@ -65,17 +65,17 @@ class SetTest(unittest.TestCase):
         # Letters were being randomized for some reason
         s1 = Set([1, 6, 4, 11])
         s2 = Set([6, 4, 11, 5])
-        s3 = s1.intersection(s2)
-        assert s3.ht.keys() == [11, 4, 6]
-        assert s3.size() == 3
+        check = s1.intersection(s2)
+        assert check.ht.keys() == [11, 4, 6]
+        assert check.size() == 3
 
     def test_difference(self):
         # Letters were being randomized for some reason
         s1 = Set([1, 6, 9, 4])
         s2 = Set([12, 4, 5])
-        s3 = s1.difference(s2)
-        assert s3.ht.keys() == [1, 9, 6]
-        assert s3.size() == 3
+        check = s1.difference(s2)
+        assert check.ht.keys() == [1, 9, 6]
+        assert check.size() == 3
 
     def test_is_subset(self):
         s1 = Set(['A', 'K', 'C'])
